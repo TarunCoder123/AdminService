@@ -9,7 +9,7 @@ const authenticate = (req, res, next) => {
     req.user = decoded;
     next();
   } catch {
-    res.status(403).json({ message: 'Invalid or expired token' });
+    res.status(403).json({ message: 'Invalid or expired token of the  admin' });
   }
 };
 

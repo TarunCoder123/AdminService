@@ -5,6 +5,7 @@ const authenticate = require('./api/auth/auth.middleware');
 const authRoutes=require("./api/auth/auth.routes");
 const propertyRoutes=require("./api/property/property.route");
 const routes = require('./api/route');
+const adminRoutes=require('./api/user/user.controller')
 
 const app=express();
 app.use(express.json());
@@ -14,6 +15,7 @@ connectDB();
 
 // app.use('/auth',authRoutes);
 app.use('api/v1',routes)
+app.use('/api/v1/admin', adminRoutes);
 // app.use('/api/properties',propertyRoutes);
 
 app.get('/',authenticate,async(req,res)=>{
