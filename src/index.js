@@ -5,13 +5,17 @@ const authenticate = require('./api/auth/auth.middleware');
 const authRoutes=require("./api/auth/auth.routes");
 const propertyRoutes=require("./api/property/property.route");
 const routes = require('./api/route');
-const adminRoutes=require('./api/user/user.controller')
+const adminRoutes=require('./api/user/user.controller');
+const { rateLimiter } = require('./middleware/rateLimit.middleware');
 
 const app=express();
 app.use(express.json());
 app.use(cookieParser());
 
 connectDB();
+
+app.use(rateLimiter);
+// app.use(customRateLimiter({ windowMs: 10 * 1000, maxRequests: 5 }));
 
 // app.use('/auth',authRoutes);
 app.use('api/v1',routes)
